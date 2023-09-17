@@ -1,0 +1,22 @@
+@mixin fontSize($size) {
+  font-size: $size;
+  line-height: calc(#{$size} + 0.8rem);
+}
+
+// Font Size
+@mixin font($color, $size, $weight: 200) {
+  color: $color;
+  @include fontSize($size);
+  font-weight: $weight;
+}
+
+// Flex wrapper
+@mixin flex($direction, $align, $justify: $align, $gap: null) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  @if ($gap) {
+    gap: $gap;
+  }
+}

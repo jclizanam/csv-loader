@@ -15,3 +15,14 @@
   font-stretch: normal;
   unicode-range: U+0020-007D;
 }
+
+*,
+*::before,
+*::after {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.375;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

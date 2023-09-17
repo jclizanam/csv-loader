@@ -16,7 +16,9 @@ export default defineConfig({
       scss: {
         additionalData: `@import "@/assets/scss/_reset.scss";
                         @import "@/assets/scss/_variables.scss";
+                        @import "@/assets/scss/_mixins.scss";
                         @import "@/assets/scss/_colours.scss";
+                        @import "@/assets/scss/_spaces.scss";
                         @import "@/assets/scss/global.scss";`
       }
     }
