@@ -2,8 +2,8 @@ DROP DATABASE `asknicely`;
 
 -- Create Employee table on init process
 CREATE DATABASE IF NOT EXISTS asknicely
-    CHARACTER SET utf8mb4
-    COLLATE utf8_general_ci;
+    CHARACTER SET utf8
+    COLLATE utf8_unicode_ci;
 
 USE `asknicely`;
 
