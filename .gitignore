@@ -1,0 +1,8 @@
+/.env
+/.vscode
+/config/*
+/data/*
+/logs/*
+/www/api/tmp/**
+/www/api/.env
+.DS_Store
