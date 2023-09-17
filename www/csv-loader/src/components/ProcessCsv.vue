@@ -5,11 +5,13 @@
       <v-button :handle-click="selectFile">Select file</v-button>
       <input type="file" ref="uploader" accept=".csv" @change="uploadFile" />
     </div>
+    <EmployeeList />
   </div>
 </template>
 
 <script>
 import ButtonUi from '@/components/_ui/Button-ui.vue'
+import EmployeeList from '@/components/EmployeeList.vue'
 
 export default {
   data() {
@@ -21,6 +23,7 @@ export default {
     }
   },
   components: {
+    EmployeeList,
     'v-button': ButtonUi
   },
   methods: {
@@ -30,6 +33,12 @@ export default {
     uploadFile() {
       this.hasSelectedFile = true
       this.fileName = this.$refs.uploader.files[0].name
+      this.$store.dispatch('UPLOAD_CSV', this.$refs.uploader.files).then((res) => {
+        console.log(res)
+      })
+    },
+    getUsers() {
+      this.$store.dispatch('GET_EMPLOYEES')
     }
   }
 }
