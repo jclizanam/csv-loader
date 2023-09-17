@@ -78,3 +78,6 @@ RUN a2enmod rewrite headers
 
 # Cleanup
 RUN rm -rf /usr/src/*
+
+#Copy default VHOST
+COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
