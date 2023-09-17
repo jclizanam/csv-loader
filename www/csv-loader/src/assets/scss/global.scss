@@ -1,0 +1,13 @@
+body {
+  -moz-osx-font-smoothing: grayscale; /*(For Firefox)*/
+  -webkit-font-smoothing: antialiased; /*(For Chrome and Safari)*/
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  text-rendering: optimizeLegibility;
+  overflow-x: unset;
+  font-family: $primary-font;
+  background-color: $white;
+}
+
+
+

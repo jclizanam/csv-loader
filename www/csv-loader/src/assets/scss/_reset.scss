@@ -1,0 +1,22 @@
+* {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  outline-style: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:focus,
+div:focus {
+  outline: none !important;
+}
