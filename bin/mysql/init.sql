@@ -3,7 +3,7 @@ DROP DATABASE `asknicely`;
 -- Create Employee table on init process
 CREATE DATABASE IF NOT EXISTS asknicely
     CHARACTER SET utf8
-    COLLATE utf8_unicode_ci;
+    COLLATE utf8mb4_unicode_ci;
 
 USE `asknicely`;
 
@@ -20,7 +20,7 @@ CREATE TABLE `employees` (
     `name` varchar(200) NOT NULL,
     `email` varchar(100) NOT NULL,
     `salary` decimal(10,2) NOT NULL DEFAULT '0.00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8_general_ci;
+) ENGINE=InnoDB;
 
 
 
