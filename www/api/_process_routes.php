@@ -5,7 +5,6 @@ $helpers = new Helpers();
 
 function match_router_uri($controller_match)
 {
-
     $controller = new stdClass();
     $controller_pieces = explode('#', $controller_match);
     $controller->class_name = $controller_pieces[0];
@@ -90,8 +89,6 @@ if (count($uri_pieces) > 0) {
 
                     unset($_GET[$routeIdName]);
                 }
-            } else {
-                $helpers->api_response(404, 'Page not found');
             }
         }
     } else {

@@ -1,6 +1,8 @@
 <template>
   <main>
-    <RouterView />
+    <component :is="$route.meta.layout || div">
+      <router-view />
+    </component>
   </main>
 </template>
 <style lang="scss">

@@ -18,9 +18,15 @@ export default defineConfig({
                         @import "@/assets/scss/_variables.scss";
                         @import "@/assets/scss/_mixins.scss";
                         @import "@/assets/scss/_colours.scss";
+                        @import "@/assets/scss/_breakpoints.scss";
                         @import "@/assets/scss/_spaces.scss";
                         @import "@/assets/scss/global.scss";`
       }
+    }
+  },
+  server: {
+    hmr: {
+      host: 'localhost'
     }
   }
 })

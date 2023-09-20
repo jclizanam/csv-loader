@@ -27,10 +27,11 @@ class api_controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             //Setting local
-            $file = !empty($_FILES['user-csv']) ? $_FILES['user-csv'] : null;
+            $file = !empty($_FILES['employees-csv']) ? $_FILES['employees-csv'] : null;
 
             // No File attached in request
             if (empty($file)) {
+
                 $this->helpers->api_response(400, 'You have to include your csv file.');
             }
 
@@ -56,7 +57,7 @@ class api_controller
                 }
             }
         }
-        $this->helpers->api_response(400, "No access");
+        $this->helpers->api_response(404, "No access");
     }
 
     /**
@@ -104,20 +105,20 @@ class api_controller
 
             // Getting fields data from PUT
             $fields = $this->helpers->parse_put_request();
-
+            
             // Validate fields
-            $fieldToValidate = ["company_name" => "string", "name" => "string", "email" => "email", "salary" => "number"];
+            $fieldToValidate = ["company" => "string", "name" => "string", "email" => "email", "salary" => "number"];
             $fields = $this->helpers->form_validation($fieldToValidate, $fields);
 
             // Validate email taken ONLY if they have the same company
-            if (($employee->getEmail() !== $fields['email']) && $fields['company_name'] === $employee->getCompany()) {
+            if (($employee->getEmail() !== $fields['email']) && $fields['company'] === $employee->getCompany()) {
                 if ($employee->isEmailTaken($fields['email'])) {
                     $this->helpers->api_response(400, "The email address is already taken.");
                 }
             }
 
             // Set new employee data
-            $employee->setCompany($fields['company_name']);
+            $employee->setCompany($fields['company']);
             $employee->setName($fields['name']);
             $employee->setEmail($fields['email']);
             $employee->setSalary($fields['salary']);

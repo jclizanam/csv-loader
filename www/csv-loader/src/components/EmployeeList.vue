@@ -1,37 +1,56 @@
 <template>
   <div class="employees">
-    <h2>Employees</h2>
-    <div class="list" v-if="employees && employees.length > 0">
-      <div class="header grid-table">
-        <span>UID </span>
-        <span>Company</span>
-        <span>Name </span>
-        <span>Email </span>
-        <span>Salary </span>
-        <span>Edit</span>
-      </div>
-      <div class="employee grid-table" v-for="employee in employees" :key="employee.id">
-        <span>{{ employee.id }}</span>
-        <span>{{ employee.company_name }}</span>
-        <span>{{ employee.name }} </span>
-        <span>{{ employee.email }}</span>
-        <span>{{ employee.salary }}</span>
-        <v-button :handle-click="editEmployee(employee)">Edit</v-button>
+    <div class="wrapper" v-if="employees && employees.length > 0">
+      <h2>Employees</h2>
+      <div>
+        <div class="header grid-table">
+          <span>UID </span>
+          <span>Company</span>
+          <span>Employee </span>
+          <span>Salary </span>
+          <span>Edit</span>
+        </div>
+
+        <div class="employee grid-table" v-for="employee in employees" :key="employee.id">
+          <span>{{ employee.id }}</span>
+          <span>{{ employee.company }}</span>
+          <span>
+            {{ employee.name }}
+            <a :href="`mailto:${employee.email}`">{{ employee.email }}</a>
+          </span>
+
+          <span>${{ employee.salary }}</span>
+          <ButtonTemplate @click="editEmployee(employee)">Edit</ButtonTemplate>
+        </div>
       </div>
     </div>
-    <div v-else>
-      <p>No employees at this moment</p>
+    <div v-else class="no-employees">
+      <p>No employees at this moment.</p>
     </div>
   </div>
+  <EditEmployee />
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import ButtonUi from '@/components/_ui/Button-ui.vue'
+import ButtonTemplate from '@/components/ButtonTemplate.vue'
+import EditEmployee from '@/components/EditEmployee.vue'
 
 export default {
   components: {
-    'v-button': ButtonUi
+    ButtonTemplate,
+    EditEmployee
+  },
+  data() {
+    return {
+      editEmployeeProps: {
+        id: Number,
+        company: String,
+        name: String,
+        email: String,
+        salary: Number
+      }
+    }
   },
   mounted() {
     this.$store.dispatch('GET_EMPLOYEES')
@@ -42,48 +61,68 @@ export default {
     })
   },
   methods: {
-    editEmployee(employee) {}
+    editEmployee(employee) {
+      this.$store.dispatch('EDIT_EMPLOYEE', employee)
+    }
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .employees {
-  h2 {
-    padding-bottom: 30px;
-  }
+  width: 100%;
+  @include flex(column, flex-start);
 
-  .list {
-    display: grid;
-    grid-template-rows: 1fr;
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $space2;
+    @include size(100%);
+    h2 {
+      @include font($white, 2.4rem, 400);
+    }
 
     .grid-table {
-      grid-template-columns: 5rem repeat(5, 1fr);
-      gap: $space3;
+      grid-template-columns: 8rem repeat(3, minmax(8rem, 1fr)) 10rem;
+
+      @include breakpoint(large) {
+        grid-template-columns: 8rem repeat(3, minmax(8rem, 1fr)) 10rem;
+        gap: $space1;
+      }
     }
 
     .header {
       display: grid;
-      background-color: $grey;
-      border: 1px solid $grey;
-      padding: 10px 10px;
-      border-top-right-radius: 5px;
-      border-top-left-radius: 5px;
+      background-color: $blue;
+      border: 1px solid $blue;
+      padding: 1.5rem 3rem;
+      @include font($white, 1.6rem, 400);
       text-align: left;
-      font-size: 14px;
-      color: $grey-super-light;
     }
 
     .employee {
       display: grid;
-      padding: 15px 7px;
-      background-color: $white;
+      padding: 1.5rem 3rem;
+      background-color: $offBlack;
       border-bottom: 1px solid $grey;
       align-items: center;
 
       span {
-        font-size: 14px;
-        padding-bottom: 5px;
+        @include font($white, 1.6rem, 400);
+        @include flex(column, flex-start);
+
+        a {
+          @include font($yellow, 1.4rem, 600);
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
       }
+    }
+  }
+
+  .no-employees {
+    p {
+      @include font($white, 2rem, 400);
     }
   }
 }
