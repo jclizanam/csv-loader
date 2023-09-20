@@ -1,5 +1,3 @@
-DROP DATABASE `asknicely`;
-
 -- Create Employee table on init process
 CREATE DATABASE IF NOT EXISTS asknicely
     CHARACTER SET utf8mb4

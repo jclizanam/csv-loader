@@ -21,7 +21,7 @@ class Company
 
     public function getAverageSalary(): array
     {
-        $sql = "SELECT CAST(AVG(salary) AS DECIMAL(10,2)) as average_salary, company_name FROM employees GROUP BY company_name ORDER BY company_name ASC";
+        $sql = "SELECT CAST(AVG(salary) AS DECIMAL(10,0)) as average_salary, company_name as company FROM employees GROUP BY company_name ORDER BY company_name ASC";
         $this->database->query($sql);
         return $this->database->allResults($sql);
     }
