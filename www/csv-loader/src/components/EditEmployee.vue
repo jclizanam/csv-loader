@@ -2,21 +2,29 @@
   <div class="edit-user" v-if="loaded">
     <div class="wrapper">
       <h3>Employee details</h3>
-      <div class="field">
+      <div class="field" :class="{ error: errors.company }">
         <label>Company</label>
-        <input type="text" name="company" v-model="form.company" />
+        <input type="text" name="company" v-model="form.company" @change="errors.company = false" />
       </div>
-      <div class="field">
+      <div class="field" :class="{ error: errors.name }">
         <label>Name</label>
-        <input type="text" name="company" v-model="form.name" />
+        <input type="text" name="company" v-model="form.name" @change="errors.name = false" />
       </div>
-      <div class="field">
+      <div class="field" :class="{ error: errors.email }">
+        >
         <label>Email</label>
-        <input type="text" name="company" v-model="form.email" />
+        <input type="text" name="company" v-model="form.email" @change="errors.email = false" />
       </div>
-      <div class="field">
+      <div class="field" :class="{ error: errors.salary }">
+        >
         <label>Salary</label>
-        <input type="number" name="company" v-model="form.salary" min="1" />
+        <input
+          type="number"
+          name="company"
+          v-model="form.salary"
+          min="1"
+          @change="errors.salary = false"
+        />
       </div>
       <div class="buttons">
         <ButtonTemplate @click="loaded = false">Close</ButtonTemplate>
@@ -100,7 +108,6 @@ export default {
   watch: {
     '$store.state.employee': {
       handler(employee) {
-        console.log(employee.id)
         if (employee.id && employee.id.length > 0) {
           this.form.id = employee.id
           this.form.company = employee.company
@@ -154,12 +161,13 @@ export default {
         font-size: $form-font-size;
       }
 
-      .error-field {
-        border: 1px solid $red;
-      }
-
-      .error-label {
-        color: $red;
+      &.error {
+        input {
+          border: 1px solid $red;
+        }
+        label {
+          color: $red;
+        }
       }
     }
 

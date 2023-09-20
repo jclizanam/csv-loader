@@ -130,6 +130,10 @@ export default {
 
   .no-mobile {
     display: none !important;
+
+    @include breakpoint(large) {
+      display: flex !important;
+    }
   }
 
   .no-employees {
