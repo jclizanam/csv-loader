@@ -4,7 +4,7 @@
       <h2>Employees</h2>
       <div>
         <div class="header grid-table">
-          <span>UID </span>
+          <span class="no-mobile">UID </span>
           <span>Company</span>
           <span>Employee </span>
           <span class="salary">Salary </span>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="employee grid-table" v-for="employee in employees" :key="employee.id">
-          <span>{{ employee.id }}</span>
+          <span class="no-mobile">{{ employee.id }}</span>
           <span>{{ employee.company }}</span>
           <span>
             {{ employee.name }}
@@ -82,7 +82,8 @@ export default {
     }
 
     .grid-table {
-      grid-template-columns: 3rem repeat(3, minmax(8rem, 1fr)) 10rem;
+      grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+      gap: $space1;
 
       @include breakpoint(large) {
         grid-template-columns: 8rem repeat(3, minmax(8rem, 1fr)) 10rem;
@@ -94,14 +95,20 @@ export default {
       display: grid;
       background-color: $blue;
       border: 1px solid $blue;
-      padding: 1.5rem 3rem;
       @include font($white, 1.6rem, 400);
       text-align: left;
+      padding: 1.5rem 0.5rem;
+      @include breakpoint(medium) {
+        padding: 1.5rem 3rem;
+      }
     }
 
     .employee {
       display: grid;
-      padding: 1.5rem 3rem;
+      padding: 1.5rem 0.5rem;
+      @include breakpoint(medium) {
+        padding: 1.5rem 3rem;
+      }
       background-color: $offBlack;
       border-bottom: 1px solid $grey;
       align-items: center;
@@ -119,6 +126,10 @@ export default {
         }
       }
     }
+  }
+
+  .no-mobile {
+    display: none !important;
   }
 
   .no-employees {
