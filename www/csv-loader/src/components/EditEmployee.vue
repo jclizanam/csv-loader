@@ -29,6 +29,7 @@
 <script>
 import { mapState } from 'vuex'
 import ButtonTemplate from '@/components/ButtonTemplate.vue'
+import { toast } from 'vue3-toastify'
 
 export default {
   name: 'EditEmployee',
@@ -75,9 +76,10 @@ export default {
           .dispatch('SAVE_EMPLOYEE', formData)
           .then((res) => {
             this.loaded = false
+            toast.success(res, { position: 'bottom-right' })
           })
           .catch((error) => {
-            console.log(error)
+            toast.error(error, { position: 'bottom-right' })
           })
       }
     },

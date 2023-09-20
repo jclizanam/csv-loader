@@ -5,6 +5,7 @@ const api = import.meta.env.VITE_API_PATH
 
 const companyStore = createStore({
   state: {
+    companies: [],
     employees: [],
     employee: {
       id: null,
@@ -29,9 +30,27 @@ const companyStore = createStore({
           return _employee
         }
       })
+    },
+    setCompanies(state, companies) {
+      state.companies = companies
     }
   },
   actions: {
+    async GET_COMPANIES_AVG({ commit }) {
+      return new Promise((resolve, fail) => {
+        axios.get(`${api}/companies/average-salary`).then(
+          (response) => {
+            const { data } = response
+            if (data.result) {
+              commit('setCompanies', data.result)
+            }
+          },
+          (error) => {
+            fail(error.response.data)
+          }
+        )
+      })
+    },
     async GET_EMPLOYEES({ commit }) {
       return new Promise((resolve, fail) => {
         axios.get(`${api}/employees`).then(
@@ -65,10 +84,11 @@ const companyStore = createStore({
     EDIT_EMPLOYEE({ commit }, employee) {
       commit('setEmployee', employee)
     },
-    SAVE_EMPLOYEE({ commit }, employee) {
+    SAVE_EMPLOYEE({ commit, dispatch }, employee) {
       return new Promise((resolve, fail) => {
         axios.put(`${api}/employee/${employee.id}`, { ...employee }).then(
           (res) => {
+            dispatch('GET_COMPANIES_AVG')
             commit('updateEmployee', employee)
             const { message } = res.data
             resolve(message)

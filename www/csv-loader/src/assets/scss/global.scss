@@ -1,4 +1,6 @@
-html { font-size: 62.5% }
+html {
+  font-size: 62.5%;
+}
 body {
   -moz-osx-font-smoothing: grayscale; /*(For Firefox)*/
   -webkit-font-smoothing: antialiased; /*(For Chrome and Safari)*/
@@ -10,5 +12,6 @@ body {
   background-color: $white;
 }
 
-
-
+:global(.Toastify__toast--success) {
+  @include font($black, 1.5rem, 400);
+}

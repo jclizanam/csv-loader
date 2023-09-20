@@ -1,13 +1,16 @@
 <template>
   <div class="process-file">
-    <ButtonTemplate @click="selectFile"><PlusIcon /> Import users</ButtonTemplate>
-    <input type="file" ref="uploader" accept=".csv" @change="uploadFile" />
+    <div>
+      <ButtonTemplate @click="selectFile"><PlusIcon /> Import users</ButtonTemplate>
+      <input type="file" ref="uploader" accept=".csv" @change="uploadFile" />
+    </div>
   </div>
 </template>
 
 <script>
 import ButtonTemplate from '@/components/ButtonTemplate.vue'
 import PlusIcon from '@/components/Icons/PlusIcon.vue'
+import { toast } from 'vue3-toastify'
 
 export default {
   data() {
@@ -35,10 +38,10 @@ export default {
       this.$store
         .dispatch('UPLOAD_CSV', formData)
         .then((res) => {
-          console.log(res)
+          toast.success(res, { position: 'bottom-right' })
         })
         .catch((error) => {
-          console.log(error)
+          toast.error(error, { position: 'bottom-right' })
         })
     },
     getUsers() {
@@ -50,8 +53,8 @@ export default {
 
 <style lang="scss">
 .process-file {
-  @include size(100%);
   @include flex(row, flex-end);
+  @include size(100%);
   input[type='file'] {
     display: none;
   }

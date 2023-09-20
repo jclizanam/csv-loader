@@ -7,7 +7,7 @@
           <span>UID </span>
           <span>Company</span>
           <span>Employee </span>
-          <span>Salary </span>
+          <span class="salary">Salary </span>
           <span>Edit</span>
         </div>
 
@@ -19,7 +19,7 @@
             <a :href="`mailto:${employee.email}`">{{ employee.email }}</a>
           </span>
 
-          <span>${{ employee.salary }}</span>
+          <span class="salary">${{ employee.salary }}</span>
           <ButtonTemplate @click="editEmployee(employee)">Edit</ButtonTemplate>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default {
     }
 
     .grid-table {
-      grid-template-columns: 8rem repeat(3, minmax(8rem, 1fr)) 10rem;
+      grid-template-columns: 3rem repeat(3, minmax(8rem, 1fr)) 10rem;
 
       @include breakpoint(large) {
         grid-template-columns: 8rem repeat(3, minmax(8rem, 1fr)) 10rem;
